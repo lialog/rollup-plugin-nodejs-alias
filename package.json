@@ -1,6 +1,6 @@
 {
   "name": "rollup-plugin-nodejs-alias",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "for resolving Node.js polyfill",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
