@@ -5,9 +5,9 @@
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "build": "npx rollup -c",
+    "build": "rm -rf dist && npx rollup -c",
     "test": "ava",
-    "pack": "npm pack ./dist"
+    "release": "npm run build && npx np --no-yarn --no-release-draft"
   },
   "repository": {
     "type": "git",

@@ -23,12 +23,13 @@ test('replace "os" to "os-browserify/browser"', async (t) => {
 
 test('replace "path" to "path-browserify"', async (t) => {
   const bundle = await rollup({
-    input: path.resolve(__dirname, 'dummy/path.js'),
+    input: path.resolve(__dirname, 'dummy/multiple.js'),
     plugins: [
       nodeJsAlias({
         include: [path.resolve(__dirname, 'dummy/*.js')],
         entries: {
-          path: 'path-browserify'
+          path: 'path-browserify',
+          os: 'os-browserify/browser'
         }
       })
     ]
@@ -37,4 +38,5 @@ test('replace "path" to "path-browserify"', async (t) => {
   const [{code}] = output;
 
   t.truthy(/import path from 'path-browserify';/.test(code));
+  t.truthy(/import os from 'os-browserify\/browser';/.test(code));
 });

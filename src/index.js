@@ -42,7 +42,6 @@ const nodeJsAlias = (options) => {
       // replace
       const magicString = new MagicString(code);
       const importDeclarations = ast.body.filter((node) => node.type === 'ImportDeclaration');
-      console.log(importDeclarations);
       for (const node of importDeclarations) {
         for (const name in entryMap) {
           if (node.source.value !== name) {
