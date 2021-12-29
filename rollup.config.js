@@ -1,5 +1,4 @@
 import cleaner from 'rollup-plugin-cleaner';
-import copy from 'rollup-plugin-copy';
 
 export default {
 	input: 'src/index.js',
@@ -18,9 +17,6 @@ export default {
   plugins: [
     cleaner({
       targets: ['./dist']
-    }),
-    copy({
-      targets: [{ src: 'package.json', dest: 'dist' }]
     })
   ]
 };

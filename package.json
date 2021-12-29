@@ -2,8 +2,8 @@
   "name": "rollup-plugin-nodejs-alias",
   "version": "1.0.0",
   "description": "for resolving Node.js polyfill",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
   "scripts": {
     "build": "npx rollup -c",
     "test": "ava",
@@ -28,8 +28,7 @@
     "esm": "^3.2.25",
     "np": "^7.6.0",
     "rollup": "^2.62.0",
-    "rollup-plugin-cleaner": "^1.0.0",
-    "rollup-plugin-copy": "^3.4.0"
+    "rollup-plugin-cleaner": "^1.0.0"
   },
   "dependencies": {
     "magic-string": "^0.25.7"
