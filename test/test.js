@@ -10,14 +10,14 @@ test('replace "os" to "os-browserify/browser"', async (t) => {
       nodeJsAlias({
         include: [path.resolve(__dirname, 'dummy/*.js')],
         entries: {
-          os: 'os-browserify/browser'
-        }
-      })
-    ]
+          os: 'os-browserify/browser',
+        },
+      }),
+    ],
   });
-  const {output} = await bundle.generate({ format: 'esm', exports: 'auto' });
-  const [{code}] = output;
-  
+  const { output } = await bundle.generate({ format: 'esm', exports: 'auto' });
+  const [{ code }] = output;
+
   t.truthy(/import os from 'os-browserify\/browser';/.test(code));
 });
 
@@ -29,13 +29,13 @@ test('replace "path" to "path-browserify"', async (t) => {
         include: [path.resolve(__dirname, 'dummy/*.js')],
         entries: {
           path: 'path-browserify',
-          os: 'os-browserify/browser'
-        }
-      })
-    ]
+          os: 'os-browserify/browser',
+        },
+      }),
+    ],
   });
-  const {output} = await bundle.generate({ format: 'esm', exports: 'auto' });
-  const [{code}] = output;
+  const { output } = await bundle.generate({ format: 'esm', exports: 'auto' });
+  const [{ code }] = output;
 
   t.truthy(/import path from 'path-browserify';/.test(code));
   t.truthy(/import os from 'os-browserify\/browser';/.test(code));

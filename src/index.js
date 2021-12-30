@@ -4,13 +4,13 @@ import { createFilter } from '@rollup/pluginutils';
 /**
  * @typedef {Object} NodeAliasOption
  * @property {Record<string, string>} entries
- * @property {boolean=} sourceMap 
+ * @property {boolean=} sourceMap
  * @property {string[]=} include
  * @property {string[]=} exclude
  */
 
 /**
- * @param {NodeAliasOption} options 
+ * @param {NodeAliasOption} options
  * @returns {Plugin}
  */
 const nodeJsAlias = (options) => {
@@ -35,7 +35,7 @@ const nodeJsAlias = (options) => {
       } catch (error) {
         return {
           code,
-          sourceMap: null
+          sourceMap: null,
         };
       }
 
@@ -48,7 +48,7 @@ const nodeJsAlias = (options) => {
             continue;
           }
           magicString.overwrite(node.source.start, node.source.end, `"${entryMap[name]}"`, {
-            storeName: true
+            storeName: true,
           });
         }
       }
@@ -56,9 +56,9 @@ const nodeJsAlias = (options) => {
       // result
       return {
         code: magicString.toString(),
-        sourceMap: hasSourceMap ? magicString.generateMap({ hires: true }) : null
+        sourceMap: hasSourceMap ? magicString.generateMap({ hires: true }) : null,
       };
-    }
+    },
   };
 };
 
