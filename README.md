@@ -21,10 +21,12 @@ npm install --save-dev rollup-plugin-nodejs-alias
 
 ## Options
 
-* entries `Record<string, string>`
-* include `string[] | string`
-* exclude `string[] | string`
-* sourceMap `boolean`
+| key       | type                   | default |
+|-----------|------------------------|---------|
+| entries   | Record<string, string> |         |
+| include   | string[] \| string     |         |
+| exclude   | string[] \| string     |         |
+| sourceMap | boolean                |         |
 
 ## Example
 
