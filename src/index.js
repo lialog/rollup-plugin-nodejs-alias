@@ -1,17 +1,18 @@
 import MagicString from 'magic-string';
 import { createFilter } from '@rollup/pluginutils';
+import injectProcess from './inject-process';
 
 /**
  * @typedef {Object} NodeAliasOption
  * @property {Record<string, string>} entries
- * @property {boolean=} sourceMap
  * @property {string[]=} include
  * @property {string[]=} exclude
+ * @property {boolean=} sourceMap
  */
 
 /**
  * @param {NodeAliasOption} options
- * @returns {Plugin}
+ * @returns {import('rollup').Plugin}
  */
 const nodeJsAlias = (options) => {
   const hasSourceMap = options.sourceMap || false;
@@ -50,6 +51,16 @@ const nodeJsAlias = (options) => {
           magicString.overwrite(node.source.start, node.source.end, `"${entryMap[name]}"`, {
             storeName: true,
           });
+        }
+      }
+
+      // inject process
+      const isProcessImported =
+        importDeclarations.findIndex((node) => node.source.value === 'process') > -1;
+      if ('process' in entryMap && !isProcessImported) {
+        const injectable = injectProcess(ast);
+        if (injectable) {
+          magicString.prepend(`import process from "${entryMap.process}";\n`);
         }
       }
 

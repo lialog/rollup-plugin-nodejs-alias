@@ -2,14 +2,20 @@
 
 for resolving Node.js polyfill 
 
+
 Before
 ```js
 import path from 'path';
+
+console.log(process.env.TEST);
 ```
 
 After
 ```js
 import path from 'path-browserify';
+import process from 'process/browser';
+
+console.log(process.env.TEST);
 ```
 
 

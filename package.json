@@ -1,11 +1,11 @@
 {
   "name": "rollup-plugin-nodejs-alias",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "for resolving Node.js polyfill",
   "main": "cjs/src/index.js",
   "module": "esm/src/index.js",
   "scripts": {
-    "build": "rm -rf dist && npx rollup -c && cp package.json dist/",
+    "build": "rm -rf dist && npx rollup -c && cp package.json dist/ && cp README.md dist/ && cp LICENSE dist/",
     "test": "ava",
     "release": "npm run build && cd dist && npx np --no-yarn --no-release-draft --no-tests"
   },
@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.1.2",
+    "estree-walker": "^2.0.2",
     "magic-string": "^0.25.7"
   }
 }
