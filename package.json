@@ -2,12 +2,12 @@
   "name": "rollup-plugin-nodejs-alias",
   "version": "1.0.1",
   "description": "for resolving Node.js polyfill",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "main": "cjs/index.js",
+  "module": "esm/index.js",
   "scripts": {
-    "build": "rm -rf dist && npx rollup -c",
+    "build": "rm -rf dist && npx rollup -c && cp package.json dist/",
     "test": "ava",
-    "release": "npm run build && npx np --no-yarn --no-release-draft"
+    "release": "npm run build && cd dist && npx np --no-yarn --no-release-draft --no-tests"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,8 @@
   },
   "homepage": "https://github.com/lialog/rollup-plugin-nodejs-alias#readme",
   "devDependencies": {
-    "@rollup/pluginutils": "^4.1.2",
+    "@rollup/plugin-commonjs": "^21.0.1",
+    "@rollup/plugin-node-resolve": "^13.1.1",
     "ava": "^3.15.0",
     "esm": "^3.2.25",
     "np": "^7.6.0",
@@ -31,6 +32,7 @@
     "rollup-plugin-cleaner": "^1.0.0"
   },
   "dependencies": {
+    "@rollup/pluginutils": "^4.1.2",
     "magic-string": "^0.25.7"
   }
 }

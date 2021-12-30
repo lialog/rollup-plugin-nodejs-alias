@@ -1,7 +1,10 @@
 import cleaner from 'rollup-plugin-cleaner';
+import commonjs from '@rollup/plugin-commonjs';
+import resolve from '@rollup/plugin-node-resolve';
 
 export default {
 	input: 'src/index.js',
+	preserveModules: true,
 	output: [
 		{
 			format: 'esm',
@@ -17,6 +20,13 @@ export default {
   plugins: [
     cleaner({
       targets: ['./dist']
-    })
+    }),
+		commonjs({
+			sourceMap: false,
+			include: 'node_modules/**',
+		}),
+		resolve({
+			extensions: ['.js'],
+		})
   ]
 };
