@@ -21,7 +21,7 @@ test('replace "os" to "os-browserify/browser"', async (t) => {
   t.truthy(/import os from 'os-browserify\/browser';/.test(code));
 });
 
-test('replace "path" to "path-browserify"', async (t) => {
+test('replace multple entries', async (t) => {
   const bundle = await rollup({
     input: path.resolve(__dirname, 'dummy/multiple.js'),
     plugins: [
