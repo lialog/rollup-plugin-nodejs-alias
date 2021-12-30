@@ -2,8 +2,8 @@
   "name": "rollup-plugin-nodejs-alias",
   "version": "1.0.1",
   "description": "for resolving Node.js polyfill",
-  "main": "cjs/index.js",
-  "module": "esm/index.js",
+  "main": "cjs/src/index.js",
+  "module": "esm/src/index.js",
   "scripts": {
     "build": "rm -rf dist && npx rollup -c && cp package.json dist/",
     "test": "ava",
