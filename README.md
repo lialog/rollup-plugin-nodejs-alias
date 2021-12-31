@@ -13,7 +13,7 @@ console.log(process.env.TEST);
 After
 ```js
 import path from 'path-browserify';
-import process from 'process/browser';
+import process from 'process-es6';
 
 console.log(process.env.TEST);
 ```
@@ -53,7 +53,8 @@ rollup({
       include: ['src/**/*'],
       exclude: ['node_modules/**/*'],
       entries: {
-        path: 'path-browserify'
+        path: 'path-browserify',
+        process: 'process-es6'
       }
     }),
     ...
@@ -62,3 +63,16 @@ rollup({
 
 ```
 
+### package.json
+
+```js
+{
+   ...
+   "devDependencies": {
+      ...
+      "path-browserify": "...",
+      "process-es6": "...",
+      ...
+   }
+}
+```
