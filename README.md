@@ -7,7 +7,7 @@ Before
 ```js
 import path from 'path';
 
-console.log(process.env.TEST);
+console.log(process.browser);
 ```
 
 After
@@ -15,7 +15,7 @@ After
 import path from 'path-browserify';
 import process from 'process-es6';
 
-console.log(process.env.TEST);
+console.log(process.browser);
 ```
 
 
