@@ -1,20 +1,24 @@
 {
   "name": "rollup-plugin-nodejs-alias",
-  "version": "1.0.3",
+  "version": "1.1.1",
   "description": "for resolving Node.js polyfill",
   "main": "cjs/src/index.js",
   "module": "esm/src/index.js",
+  "types": "esm/src/types.d.ts",
   "scripts": {
-    "build": "rm -rf dist && npx rollup -c && cp package.json dist/ && cp README.md dist/ && cp LICENSE dist/",
+    "build": "npx rollup -c",
     "test": "ava",
-    "release": "npm run build && cd dist && npx np --no-yarn --no-release-draft --no-tests"
+    "release": "npm run build && npx np --no-yarn --no-release-draft --no-tests --contents=./dist",
+    "postversion": "cp package.json dist/"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lialog/rollup-plugin-nodejs-alias.git"
   },
   "keywords": [
-    "rollup"
+    "rollup",
+    "plugin",
+    "nodejs"
   ],
   "author": "lia <milkirre@gmail.com>",
   "license": "MIT",
@@ -23,17 +27,32 @@
   },
   "homepage": "https://github.com/lialog/rollup-plugin-nodejs-alias#readme",
   "devDependencies": {
+    "@ava/typescript": "^3.0.1",
     "@rollup/plugin-commonjs": "^21.0.1",
     "@rollup/plugin-node-resolve": "^13.1.1",
-    "ava": "^3.15.0",
+    "@typescript-eslint/eslint-plugin": "^5.8.1",
+    "ava": "^4.0.0-rc.1",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
     "esm": "^3.2.25",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
     "np": "^7.6.0",
     "rollup": "^2.62.0",
-    "rollup-plugin-cleaner": "^1.0.0"
+    "rollup-plugin-cleaner": "^1.0.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
   },
   "dependencies": {
     "@rollup/pluginutils": "^4.1.2",
     "estree-walker": "^2.0.2",
     "magic-string": "^0.25.7"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix"
+    ]
   }
 }

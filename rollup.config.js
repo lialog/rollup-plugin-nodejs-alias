@@ -1,9 +1,11 @@
 import cleaner from 'rollup-plugin-cleaner';
 import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
+import copy from 'rollup-plugin-copy';
+import typescript from 'rollup-plugin-typescript2';
 
 export default {
-  input: 'src/index.js',
+  input: 'src/index.ts',
   preserveModules: true,
   output: [
     {
@@ -27,6 +29,13 @@ export default {
     }),
     resolve({
       extensions: ['.js'],
+    }),
+    typescript({}),
+    copy({
+      targets: [
+        { src: 'README.md', dest: 'dist' },
+        { src: 'LICENSE', dest: 'dist' },
+      ],
     }),
   ],
 };

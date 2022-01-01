@@ -1,38 +1,30 @@
 import MagicString from 'magic-string';
 import { createFilter } from '@rollup/pluginutils';
+import { type Plugin, type AcornNode } from 'rollup';
+import { type Program, type ImportDeclaration } from 'estree';
 import injectProcess from './inject-process';
+import { type NodeAliasOption } from './types';
+import { isImportDeclarationNode } from './utils';
 
-/**
- * @typedef {Object} NodeAliasOption
- * @property {Record<string, string>} entries
- * @property {string[]=} include
- * @property {string[]=} exclude
- * @property {boolean=} sourceMap
- */
-
-/**
- * @param {NodeAliasOption} options
- * @returns {import('rollup').Plugin}
- */
-const nodeJsAlias = (options) => {
-  const hasSourceMap = options.sourceMap || false;
-  const entryMap = options.entries || {};
-  const include = options.include || [];
-  const exclude = options.exclude || [];
+const nodeJsAlias = (options: NodeAliasOption): Plugin => {
+  const entryMap = options.entries ?? {};
+  const hasSourceMap = options?.sourceMap ?? false;
+  const include = options?.include ?? [];
+  const exclude = options?.exclude ?? [];
   const filter = createFilter(include, exclude);
 
   return {
     name: 'nodejs-alias',
-    transform(code, id) {
+    transform(code: string, id: string) {
       // filter
       if (!filter(id)) {
         return null;
       }
 
       // init AST
-      let ast = null;
+      let ast: Program | null = null;
       try {
-        ast = this.parse(code);
+        ast = this.parse(code) as unknown as Program;
       } catch (error) {
         return {
           code,
@@ -42,13 +34,14 @@ const nodeJsAlias = (options) => {
 
       // replace
       const magicString = new MagicString(code);
-      const importDeclarations = ast.body.filter((node) => node.type === 'ImportDeclaration');
+      const importDeclarations = ast.body.filter((node): node is ImportDeclaration => isImportDeclarationNode(node));
       for (const node of importDeclarations) {
         for (const name in entryMap) {
           if (node.source.value !== name) {
             continue;
           }
-          magicString.overwrite(node.source.start, node.source.end, `"${entryMap[name]}"`, {
+          const source = node.source as unknown as AcornNode;
+          magicString.overwrite(source.start, source.end, `"${entryMap[name]}"`, {
             storeName: true,
           });
         }

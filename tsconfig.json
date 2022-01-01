@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "lib": ["esnext"],
+    "moduleResolution": "node",
+    "target": "es2017",
+    "module": "esnext",
+    "declaration": true,
+    "declarationDir": "dist/esm/src",
+    "noImplicitAny": true,
+    "allowJs": true,
+    "rootDir": "."
+  },
+  "include": ["src", "test/*.ts"],
+  "exclude": ["dist", "node_modules", "test"],
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  }
+}
